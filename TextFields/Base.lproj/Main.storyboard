@@ -188,7 +188,12 @@
                     </view>
                     <connections>
                         <outlet property="countLabel" destination="Lmm-NP-ARX" id="BWL-Ju-437"/>
+                        <outlet property="eightChar" destination="33d-YE-xLj" id="jDR-Yp-mff"/>
                         <outlet property="inputLimit" destination="9cb-aP-Ll4" id="nce-01-jb4"/>
+                        <outlet property="linkTextField" destination="ded-gu-TM4" id="sTB-ih-5Ex"/>
+                        <outlet property="oneCapital" destination="mhr-gs-Y0V" id="mNM-uo-snw"/>
+                        <outlet property="oneDig" destination="BxW-LR-sQJ" id="gjf-0F-GQH"/>
+                        <outlet property="oneLowercase" destination="qww-kn-n2K" id="vbn-nG-j0M"/>
                         <outlet property="onlyText" destination="RUK-3m-9pz" id="oHd-5g-fxJ"/>
                         <outlet property="passwordProgress" destination="AFX-5f-TbV" id="6lF-ob-1Rp"/>
                         <outlet property="passwordTextfield" destination="em0-db-n7u" id="1JP-NX-wVM"/>
