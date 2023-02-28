@@ -51,17 +51,13 @@ extension ViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
         if textField == onlyText {
-            // Exclude numbers from the textField field
-            let allowedCharacters = CharacterSet.letters
-            let characterSet = CharacterSet(charactersIn: string)
-            return allowedCharacters.isSuperset(of: characterSet)
+            return onlyAllowText(string: string)
             
         } else if textField == textAndNumbers {
             // Calculate new character count
             let oldText = textField.text ?? ""
             let newText = (oldText as NSString).replacingCharacters(in: range, with: string)
             let charCount = newText.count
-            
             
             if charCount == 6 && oldText.count == 7 {
                 let text = oldText.dropLast(2)
@@ -77,6 +73,7 @@ extension ViewController: UITextFieldDelegate {
                 let characterSet = CharacterSet(charactersIn: string)
                 return allowedCharacters.isSuperset(of: characterSet)
             }
+            
         } else if textField == inputLimit {
             // Calculate new character count
             let oldText = textField.text ?? ""
@@ -117,28 +114,36 @@ extension ViewController: UITextFieldDelegate {
             
 
             if digitTest.evaluate(with: updatedText) {
-                oneDig.textColor = UIColor.green
                 strength += 0.25
+                oneDig.textColor = UIColor.green
+                oneDig.text = "✓ min 1 digit."
             } else {
                 oneDig.textColor = UIColor.black
+                oneDig.text = "- min 1 digit."
             }
             if lowercaseTest.evaluate(with: updatedText) {
-                oneLowercase.textColor = UIColor.green
                 strength += 0.25
+                oneLowercase.textColor = UIColor.green
+                oneLowercase.text = "✓ min 1 lowercase."
             } else {
                 oneLowercase.textColor = UIColor.black
+                oneLowercase.text = "- min 1 lowercase."
             }
             if capitalTest.evaluate(with: updatedText) {
-                oneCapital.textColor = UIColor.green
                 strength += 0.25
+                oneCapital.textColor = UIColor.green
+                oneCapital.text = "✓ min 1 capital required."
             } else {
                 oneCapital.textColor = UIColor.black
+                oneCapital.text = "- min 1 capital required."
             }
             if updatedText.count >= 8 {
                 strength += 0.25
                 eightChar.textColor = UIColor.green
+                eightChar.text = "✓ min length 8 characters."
             } else {
                 eightChar.textColor = UIColor.black
+                eightChar.text = "- min length 8 characters."
                 
             }
             
@@ -188,8 +193,21 @@ extension ViewController: UITextFieldDelegate {
             safariViewController = nil
         }
     }
-        
+    
+    // Hide the keyboard when enter was pressed
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
     }
+    
+
+    // only allow characters and spaces
+    func onlyAllowText(string: String) -> Bool {
+        let allowedCharacters = CharacterSet.letters.union(CharacterSet(charactersIn: " "))
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet)
+    }
+    
+}
     
     
     
